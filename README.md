@@ -5,7 +5,7 @@ It uses [serde](https://crates.io/crates/serde), [serde_json](https://crates.io/
 
 ## Example
 
-Input:  
+Input (input.json):  
 
 ```json
 {
@@ -38,7 +38,7 @@ Run:
 dsc input.json output.yaml
 ```
 
-Output:  
+Output (output.yaml):  
 
 ```yaml
 menu:
