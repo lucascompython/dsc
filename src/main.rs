@@ -18,9 +18,9 @@ enum Value {
 
 fn get_source_value(source_ext: &str, source_content: String) -> Value {
     match source_ext {
-        "json" => Value::Json(serde_json::from_str(source_content.as_str()).unwrap()),
-        "yaml" => Value::Yaml(serde_yaml::from_str(source_content.as_str()).unwrap()),
-        "toml" => Value::Toml(toml::from_str(source_content.as_str()).unwrap()),
+        "json" => Value::Json(serde_json::from_str(source_content.as_str()).expect("Invalid JSON")),
+        "yaml" => Value::Yaml(serde_yaml::from_str(source_content.as_str()).expect("Invalid YAML")),
+        "toml" => Value::Toml(toml::from_str(source_content.as_str()).expect("Invalid TOML")),
         _ => {
             eprintln!("File type not supported: {}", source_ext);
             process::exit(1);
@@ -30,9 +30,11 @@ fn get_source_value(source_ext: &str, source_content: String) -> Value {
 
 fn get_target_value(target_ext: &str, source_value: Value) -> String {
     match target_ext {
-        "json" => serde_json::to_string_pretty(&source_value).unwrap(),
-        "yaml" => serde_yaml::to_string(&source_value).unwrap(),
-        "toml" => toml::to_string_pretty(&source_value).unwrap(),
+        "json" => serde_json::to_string_pretty(&source_value).expect("Could not serialize to JSON"),
+        "yaml" => serde_yaml::to_string(&source_value).expect("Could not serialize to YAML"),
+        "toml" => toml::to_string_pretty(&source_value).expect(
+            "Could not serialize to TOML, probably because can't stringify arrays only objects",
+        ),
         _ => {
             eprintln!("File type not supported: {}", target_ext);
             process::exit(1);
