@@ -2,8 +2,6 @@
 name = "dsc"
 version = "0.2.0"
 edition = "2021"
-author = "Lucas de Linhares"
-about = "A simple and fast tool to convert data serialization formats."
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
