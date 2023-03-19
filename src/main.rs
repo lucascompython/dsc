@@ -47,11 +47,11 @@ fn get_target_value(target_ext: &str, source_value: Value, opt_size: bool) -> St
         "toml" => {
             if opt_size {
                 toml::to_string(&source_value).expect(
-                "Could not serialize to TOML, probably because can't stringify arrays only objects",
+                    "Could not serialize to TOML, probably because can't stringify arrays only objects",
                 )
             } else {
                 toml::to_string_pretty(&source_value).expect(
-                "Could not serialize to TOML, probably because can't stringify arrays only objects",
+                    "Could not serialize to TOML, probably because can't stringify arrays only objects",
                 )
             }
         }
