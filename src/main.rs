@@ -22,7 +22,7 @@ fn get_source_value(source_ext: &str, source_content: String) -> Value {
         "yaml" => Value::Yaml(serde_yaml::from_str(source_content.as_str()).unwrap()),
         "toml" => Value::Toml(toml::from_str(source_content.as_str()).unwrap()),
         _ => {
-            eprintln!("Filetype not supported: {}", source_ext);
+            eprintln!("File type not supported: {}", source_ext);
             process::exit(1);
         }
     }
