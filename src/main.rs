@@ -2,10 +2,16 @@ use clap::Parser;
 use serde::Serialize;
 use std::process;
 
+/// Fast and simple data serialization format converter
 #[derive(Parser)]
+#[clap(author, version, about, long_about = None)]
 struct Cli {
     source: String,
     target: String,
+
+    /// Optimize size of json and toml output by removing whitespace
+    #[arg(long, short, action)]
+    optimize_size: bool,
 }
 
 #[derive(Serialize)]
@@ -28,13 +34,27 @@ fn get_source_value(source_ext: &str, source_content: String) -> Value {
     }
 }
 
-fn get_target_value(target_ext: &str, source_value: Value) -> String {
+fn get_target_value(target_ext: &str, source_value: Value, opt_size: bool) -> String {
     match target_ext {
-        "json" => serde_json::to_string_pretty(&source_value).expect("Could not serialize to JSON"),
+        "json" => {
+            if opt_size {
+                serde_json::to_string(&source_value).expect("Could not serialize to JSON")
+            } else {
+                serde_json::to_string_pretty(&source_value).expect("Could not serialize to JSON")
+            }
+        }
         "yaml" => serde_yaml::to_string(&source_value).expect("Could not serialize to YAML"),
-        "toml" => toml::to_string_pretty(&source_value).expect(
-            "Could not serialize to TOML, probably because can't stringify arrays only objects",
-        ),
+        "toml" => {
+            if opt_size {
+                toml::to_string(&source_value).expect(
+                "Could not serialize to TOML, probably because can't stringify arrays only objects",
+                )
+            } else {
+                toml::to_string_pretty(&source_value).expect(
+                "Could not serialize to TOML, probably because can't stringify arrays only objects",
+                )
+            }
+        }
         _ => {
             eprintln!("File type not supported: {}", target_ext);
             process::exit(1);
@@ -63,7 +83,7 @@ fn main() {
 
     let source_value = get_source_value(source_ext, source_content);
 
-    let target_value = get_target_value(target_ext, source_value);
+    let target_value = get_target_value(target_ext, source_value, args.optimize_size);
 
     std::fs::write(target_name.to_string() + "." + target_ext, target_value)
         .expect("Unable to write file");
