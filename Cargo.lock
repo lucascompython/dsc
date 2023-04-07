@@ -59,7 +59,7 @@ dependencies = [
 
 [[package]]
 name = "dsc"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "clap",
  "quick-xml 0.28.1",
