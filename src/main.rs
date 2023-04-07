@@ -31,7 +31,7 @@ enum Value {
 fn get_source_value(source_ext: &str, source_content: &str) -> Value {
     match source_ext {
         "json" => Value::Json(serde_json::from_str(source_content).expect("Invalid JSON")),
-        "yaml" => Value::Yaml(serde_yaml::from_str(source_content).expect("Invalid YAML")),
+        "yaml" | "yml" => Value::Yaml(serde_yaml::from_str(source_content).expect("Invalid YAML")),
         "toml" => Value::Toml(toml::from_str(source_content).expect("Invalid TOML")),
         "xml" => Value::Xml(
             quickxml_to_serde::xml_str_to_json(
@@ -65,7 +65,7 @@ fn get_target_value(
                 None
             }
         }
-        "yaml" => {
+        "yaml" | "yml" => {
             serde_yaml::to_writer(writer, &source_value).expect("Could not serialize to YAML");
             None
         }
@@ -93,7 +93,8 @@ fn get_target_value(
                 .expect("Could not serialize to XML");
 
             if root_tag.is_empty() {
-                return Some(String::from(&buffer[2..buffer.len() - 3]));
+                buffer = buffer.replace("<>", "");
+                buffer = buffer.replace("</>", "");
             }
 
             Some(buffer)
