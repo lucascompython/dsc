@@ -52,7 +52,7 @@ fn get_target_value(
     source_value: Value,
     opt_size: bool,
     root_tag: String,
-    writer: std::io::BufWriter<std::fs::File>,
+    writer: BufWriter<File>,
 ) -> Option<String> {
     match target_ext {
         "json" => {
@@ -113,14 +113,14 @@ fn main() {
     let source = Path::new(&args.source);
     let target = Path::new(&args.target);
 
-    let source_content = std::fs::read_to_string(&args.source).unwrap();
+    let source_content = std::fs::read_to_string(source).unwrap();
 
     let source_value = get_source_value(
         source.extension().and_then(OsStr::to_str).unwrap(),
         source_content.as_str(),
     );
 
-    let file = BufWriter::new(File::create(&args.target).unwrap());
+    let file = BufWriter::new(File::create(target).unwrap());
 
     let target_value = get_target_value(
         target.extension().and_then(OsStr::to_str).unwrap(),
@@ -131,6 +131,6 @@ fn main() {
     );
 
     if let Some(target_value) = target_value {
-        std::fs::write(args.target, target_value).expect("Unable to write file");
+        std::fs::write(target, target_value).expect("Unable to write file");
     }
 }
