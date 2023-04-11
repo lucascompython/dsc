@@ -25,11 +25,13 @@ dsc input.toml --to xml > out.xml # source format is inferred from the file exte
 Reading from stdin and writing to stdout:
 
 ```ps1
-curl -s https://api.github.com/users/lucascompython | dsc --from json --to yaml | cat # here target format needs to be explicitly specified
+# here target format needs to be explicitly specified
+curl -s https://api.github.com/users/lucascompython | dsc --from json --to yaml | cat 
 ```
 
 Reading from a file and writing to another file:
 
 ```ps1
-dsc input.toml out.xml -r roottag -o # the -o flags enables whitespace removal and the -r flag sets the root tag for xml
+# the -o flags enables whitespace removal and the -r flag sets the root tag for xml
+dsc input.toml out.xml -r roottag -o # formats are inferred from the file extensions
 ```
