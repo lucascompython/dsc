@@ -1,59 +1,35 @@
 # dsc (Data Serialization Language Converter)
 
-This is a tool to convert data from one format to another.  
+This is a tool to convert data from one format to another `blazingly fast`.  
 It uses [serde](https://crates.io/crates/serde), [serde_json](https://crates.io/crates/serde_json) and [serde_yaml](https://crates.io/crates/serde_yaml), [toml](https://crates.io/crates/toml) and [quick-xml](https://crates.io/crates/quick-xml) to do the heavy lifting.  
+Null values are not supported in toml, at least for now.
 
-## Example
+## Examples
 
-```bash
-dsc --help
+```ps1
+dsc --help # to see all the options
 ```
 
-Input (input.json):  
+Reading from stdin and writing to a file:
 
-```json
-{
-    "menu": {
-        "id": "file",
-        "value": "File",
-        "popup": {
-            "menuitem": [
-                {
-                    "value": "New",
-                    "onclick": "CreateNewDoc()"
-                },
-                {
-                    "value": "Open",
-                    "onclick": "OpenDoc()"
-                },
-                {
-                    "value": "Close",
-                    "onclick": "CloseDoc()"
-                }
-            ]
-        }
-    }
-}
+```ps1
+cat input.json | dsc --from json out.yaml # target format is inferred from the file extension 
 ```
 
-Run:
+Writing to stdout and reading from a file:
 
-```bash
-dsc input.json output.yaml
+```ps1
+dsc input.toml --to xml > out.xml # source format is inferred from the file extension 
 ```
 
-Output (output.yaml):  
+Reading from stdin and writing to stdout:
 
-```yaml
-menu:
-  id: file
-  popup:
-    menuitem:
-    - onclick: CreateNewDoc()
-      value: New
-    - onclick: OpenDoc()
-      value: Open
-    - onclick: CloseDoc()
-      value: Close
-  value: File
+```ps1
+curl -s https://api.github.com/users/lucascompython | dsc --from json --to yaml | cat # here target format needs to be explicitly specified
+```
+
+Reading from a file and writing to another file:
+
+```ps1
+dsc input.toml out.xml -r roottag -o # the -o flags enables whitespace removal and the -r flag sets the root tag for xml
 ```

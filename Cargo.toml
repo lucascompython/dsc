@@ -1,10 +1,10 @@
 [package]
 name = "dsc"
-version = "0.3.1"
+version = "0.4.0"
 edition = "2021"
 license = "GPL-3.0-or-later"
 authors = ["Lucas de Linhares <lucasdelinhares@gmail.com>"]
-description = "A simple tool to convert DSC files to JSON, YAML, XML or TOML"
+description = "CLI tool to convert between different formats."
 homepage = "https://github.com/lucascompython/dsc"
 repository = "https://github.com/lucascompython/dsc"
 keywords = ["cli", "format", "convert", "convertor", "tool", "yaml", "json", "xml", "toml"]
@@ -16,6 +16,7 @@ categories = ["command-line-utilities", "command-line-interface"]
 
 [dependencies]
 clap = { version = "4.1.10", features = ["derive"] }
+is-terminal = "0.4.7"
 quick-xml = {version = "0.28.1", features = ["serialize", "serde"] }
 quickxml_to_serde = "0.5.0"
 serde = { version = "1.0.159", features = ["derive"] }
