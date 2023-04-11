@@ -25,7 +25,7 @@ dsc input.toml --to xml > out.xml # source format is inferred from the file exte
 Reading from stdin and writing to stdout:
 
 ```ps1
-# here target format needs to be explicitly specified
+# here both formats need to be explicitly specified because there are no file extensions
 curl -s https://api.github.com/users/lucascompython | dsc --from json --to yaml | cat 
 ```
 
