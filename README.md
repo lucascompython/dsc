@@ -1,6 +1,6 @@
 # dsc (Data Serialization Language Converter)
 
-This is a tool to convert data from one format to another `blazingly fast`.  
+This is a `blazingly fast` tool that converts data from one format to another .  
 It uses [serde](https://crates.io/crates/serde), [serde_json](https://crates.io/crates/serde_json) and [serde_yaml](https://crates.io/crates/serde_yaml), [toml](https://crates.io/crates/toml) and [quick-xml](https://crates.io/crates/quick-xml) to do the heavy lifting.  
 Null values are not supported in toml, at least for now.
 
