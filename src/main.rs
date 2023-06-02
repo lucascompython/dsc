@@ -1,7 +1,7 @@
 use clap::Parser;
-use is_terminal::IsTerminal;
 use quickxml_to_serde::{Config, NullValue};
 use serde::{Deserialize, Serialize};
+use std::io::IsTerminal;
 use std::io::{self, BufWriter, Read, Write};
 use std::{ffi::OsStr, fs::File, path::Path, process};
 
