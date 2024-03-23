@@ -7,21 +7,30 @@ authors = ["Lucas de Linhares <lucasdelinhares@gmail.com>"]
 description = "CLI tool to convert between different formats."
 homepage = "https://github.com/lucascompython/dsc"
 repository = "https://github.com/lucascompython/dsc"
-keywords = ["cli", "format", "convert", "convertor", "tool", "yaml", "json", "xml", "toml"]
+keywords = [
+    "cli",
+    "format",
+    "convert",
+    "convertor",
+    "tool",
+    "yaml",
+    "json",
+    "xml",
+    "toml",
+]
 categories = ["command-line-utilities", "command-line-interface"]
-
 
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-clap = { version = "4.2.7", features = ["derive"] }
-quick-xml = {version = "0.28.2", features = ["serialize", "serde"] }
-quickxml_to_serde = "0.5.0"
-serde = { version = "1.0.162", features = ["derive"] }
-serde_json = "1.0.96"
+clap = { version = "4.5.3", features = ["derive"] }
+quick-xml = { version = "0.31.0", features = ["serialize", "serde"] }
+quickxml_to_serde = "0.6.0"
+serde = { version = "1.0.197", features = ["derive"] }
+serde_json = "1.0.114"
 serde_yaml = "0.9.21"
-toml = "0.7.3"
+toml = "0.8.12"
 
 
 [profile.release]
@@ -29,4 +38,3 @@ lto = true
 panic = "abort"
 codegen-units = 1
 strip = true
-
