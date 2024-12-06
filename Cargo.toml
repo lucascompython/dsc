@@ -1,6 +1,6 @@
 [package]
 name = "dsc"
-version = "0.4.1"
+version = "0.4.2"
 edition = "2021"
 license = "GPL-3.0-or-later"
 authors = ["Lucas de Linhares <lucasdelinhares@gmail.com>"]
@@ -24,13 +24,13 @@ categories = ["command-line-utilities", "command-line-interface"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-clap = { version = "4.5.3", features = ["derive"] }
-quick-xml = { version = "0.31.0", features = ["serialize", "serde"] }
+clap = { version = "4.5.23", features = ["derive"] }
+quick-xml = { version = "0.37.1", features = ["serialize", "serde"] }
 quickxml_to_serde = "0.6.0"
-serde = { version = "1.0.197", features = ["derive"] }
-serde_json = "1.0.114"
-serde_yaml = "0.9.21"
-toml = "0.8.12"
+serde = { version = "1.0.215", features = ["derive"] }
+serde_json = "1.0.133"
+serde_yaml = "0.9.34+deprecated"
+toml = "0.8.19"
 
 
 [profile.release]
